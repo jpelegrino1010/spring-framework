@@ -16,6 +16,7 @@ public class App
 
         Vehicle vehicle=context.getBean(Vehicle.class);
         System.out.println(vehicle.getName());
+        vehicle.printHello();
 
     }
 }
