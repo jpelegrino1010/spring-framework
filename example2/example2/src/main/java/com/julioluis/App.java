@@ -14,10 +14,10 @@ public class App
     {
         AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(ProjectConfig.class);
 
-        Vehicle vehicle=context.getBean("vehicle1",Vehicle.class);
+        Vehicle vehicle=context.getBean("honda",Vehicle.class);
         System.out.println(vehicle.getName());
 
-        Vehicle vehicle2=context.getBean("vehicle2",Vehicle.class);
+        Vehicle vehicle2=context.getBean("ferrari",Vehicle.class);
         System.out.println(vehicle2.getName());
     }
 }
