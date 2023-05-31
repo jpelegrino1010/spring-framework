@@ -18,5 +18,7 @@ public class App
         System.out.println(vehicle.getName());
         vehicle.printHello();
 
+        context.close();
+
     }
 }
