@@ -22,10 +22,10 @@ public class App
         AnnotationConfigApplicationContext  context=new AnnotationConfigApplicationContext(ProjectConfig.class);
 
         Person person=context.getBean(Person.class);
-        Vehicle vehicle=context.getBean(Vehicle.class);
+//        Vehicle vehicle=context.getBean(Vehicle.class);
 
 
-        System.out.println(vehicle.getName());
+//        System.out.println(vehicle.getName());
         System.out.println(person.getName());
         System.out.println(person.getVehicle());
 
