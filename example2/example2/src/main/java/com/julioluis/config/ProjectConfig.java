@@ -1,5 +1,6 @@
 package com.julioluis.config;
 
+import com.julioluis.beans.Person;
 import com.julioluis.beans.Vehicle;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -9,6 +10,22 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 @ComponentScan(basePackages = "com.julioluis")
 public class ProjectConfig {
+
+    @Bean
+    public Vehicle vehicle() {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setName("Toyota");
+        return vehicle;
+    }
+
+    @Bean
+    public Person person() {
+        Person person=new Person();
+        person.setName("Peter");
+        person.setVehicle(vehicle());
+
+        return person;
+    }
 
 
 }
