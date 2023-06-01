@@ -1,14 +1,20 @@
 package com.julioluis.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Person {
 
     private String name="Peter";
-    @Autowired
+
     private Vehicle vehicle;
+
+    @Autowired
+    public Person(@Qualifier("vehicle1") Vehicle vehicle) {
+        this.vehicle=vehicle;
+    }
 
     public String getName() {
         return name;
