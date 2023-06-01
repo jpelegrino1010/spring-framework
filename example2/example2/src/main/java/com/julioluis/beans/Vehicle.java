@@ -30,4 +30,11 @@ public class Vehicle {
     public void printHello() {
         System.out.println("Hello from vehicle spring context");
     }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
