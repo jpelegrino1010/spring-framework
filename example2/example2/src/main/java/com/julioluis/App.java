@@ -4,6 +4,7 @@ import com.julioluis.beans.Vehicle;
 import com.julioluis.config.ProjectConfig;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Objects;
 import java.util.Random;
@@ -17,49 +18,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext(ProjectConfig.class);
+        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
 
-        final Vehicle honda=new Vehicle();
-        honda.setName("Honda");
+        Vehicle vehicle=context.getBean(Vehicle.class);
+        System.out.println(vehicle.getName());
 
-        Supplier<Vehicle> hondaSupplier = () -> honda;
-
-        final Vehicle audi=new Vehicle();
-        audi.setName("Audi");
-        Supplier<Vehicle> audiSupplier = () -> audi;
-
-        Random random=new Random();
-        int randomNum= random.nextInt(10);
-
-        if(randomNum%2==0) {
-            context.registerBean("honda",Vehicle.class,hondaSupplier);
-        }else {
-            context.registerBean("audi",Vehicle.class,audiSupplier);
-        }
-
-        Vehicle hondaVehicle=null;
-        Vehicle audiVehicle=null;
-
-        System.out.println("Random number is:: "+ randomNum);
-
-        try {
-            hondaVehicle=context.getBean("honda",Vehicle.class);
-        }catch (NoSuchBeanDefinitionException ex) {
-            System.out.println("Error while trying to retrieve honda bean");
-        }
-
-        try {
-            audiVehicle=context.getBean("audi",Vehicle.class);
-        }catch (NoSuchBeanDefinitionException ex) {
-            System.out.println("Error while trying to retrieve audi bean");
-        }
-
-
-        if(Objects.nonNull(hondaVehicle)) {
-            System.out.println("Your print vehicle is "+ hondaVehicle.getName());
-        }else {
-            System.out.println("Your print vehicle is "+ audiVehicle.getName());
-        }
 
 
 
