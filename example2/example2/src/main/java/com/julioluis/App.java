@@ -1,5 +1,6 @@
 package com.julioluis;
 
+import com.julioluis.beans.Person;
 import com.julioluis.beans.Vehicle;
 import com.julioluis.config.ProjectConfig;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -18,11 +19,15 @@ public class App
 {
     public static void main( String[] args )
     {
-        ClassPathXmlApplicationContext context=new ClassPathXmlApplicationContext("beans.xml");
+        AnnotationConfigApplicationContext  context=new AnnotationConfigApplicationContext(ProjectConfig.class);
 
+        Person person=context.getBean(Person.class);
         Vehicle vehicle=context.getBean(Vehicle.class);
-        System.out.println(vehicle.getName());
 
+
+        System.out.println(vehicle.getName());
+        System.out.println(person.getName());
+        System.out.println(person.getVehicle());
 
 
 
