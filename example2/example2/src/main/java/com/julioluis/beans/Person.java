@@ -2,9 +2,11 @@ package com.julioluis.beans;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
+@Lazy
 public class Person {
 
     private String name="Peter";
@@ -12,7 +14,8 @@ public class Person {
     private Vehicle vehicle;
 
     @Autowired
-    public Person(@Qualifier("vehicle1") Vehicle vehicle) {
+    public Person(Vehicle vehicle) {
+        System.out.println("Person bean has bean created");
         this.vehicle=vehicle;
     }
 

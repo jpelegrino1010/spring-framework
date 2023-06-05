@@ -26,6 +26,7 @@ public class ProjectConfig {
     }
 
     @Bean
+    @Primary
     public Vehicle vehicle3() {
         Vehicle vehicle=new Vehicle();
         vehicle.setName("Ferrari");
