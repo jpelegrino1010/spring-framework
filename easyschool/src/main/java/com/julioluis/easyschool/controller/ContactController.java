@@ -38,7 +38,10 @@ public class ContactController {
         if (errors.hasErrors()) {
             log.error("Error on contact form "+ errors.toString());
             modelAndView=new ModelAndView("/contact.html");
+            return modelAndView;
         }
+        contactService.setCounter(contactService.getCounter()+1);
+        log.info("You are submitting bean # "+ contactService.getCounter());
         contactService.saveContactDetail(contact);
 
         return modelAndView;
