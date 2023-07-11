@@ -17,7 +17,8 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests()
+        http.csrf().ignoringRequestMatchers("/contact")
+                        .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("","/","/home").permitAll()
                         .requestMatchers("/courses").permitAll()
@@ -25,6 +26,7 @@ public class SecurityConfig {
                         .requestMatchers("/holidays/**").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/logout").permitAll()
                         .and().formLogin().loginPage("/login")
                         .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                         .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
