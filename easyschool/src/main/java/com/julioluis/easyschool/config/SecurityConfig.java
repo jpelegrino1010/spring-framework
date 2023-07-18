@@ -1,6 +1,7 @@
 package com.julioluis.easyschool.config;
 
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.nio.file.PathMatcher;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -17,7 +20,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http.csrf().ignoringRequestMatchers("/contact")
+        http.csrf().ignoringRequestMatchers("/saveMessage").ignoringRequestMatchers(PathRequest.toH2Console())
                         .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("","/","/home").permitAll()
@@ -27,11 +30,14 @@ public class SecurityConfig {
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
+                        .requestMatchers(PathRequest.toH2Console()).permitAll()
                         .and().formLogin().loginPage("/login")
                         .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                         .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
 
                 .and().httpBasic();
+
+                http.headers().frameOptions().disable();
         return http.build();
     }
 
