@@ -8,6 +8,8 @@ import lombok.Data;
 @Data
 public class Contact {
 
+
+    private Integer id;
     @NotBlank(message = "Name must no be blank")
     private String name;
     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be 10 digits")
@@ -17,6 +19,7 @@ public class Contact {
     private String email;
     private String subject;
     private String message;
+    private String status;
 
 
 }
