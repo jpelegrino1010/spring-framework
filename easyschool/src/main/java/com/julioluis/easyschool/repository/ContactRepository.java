@@ -25,11 +25,11 @@ public class ContactRepository {
     }
 
     public int saveContactMsg(Contact contact) {
-        String query="INSERT INTO contact_msg(NAME,MOBILE_NUM,EMAIL,SUBJECT,MESSAGE,STATUS)" +
-                " values(?,?,?,?,?,?,?)";
+        String query="INSERT INTO contact_msg(name,mobile_num,email,subject,message,status,created_at,created_by)" +
+                " values(?,?,?,?,?,?,?,?)";
 
         return jdbcTemplate.update(query,contact.getName(),contact.getMobileNum(),contact.getEmail(),
-                contact.getSubject(),contact.getMessage(),contact.getStatus());
+                contact.getSubject(),contact.getMessage(),contact.getStatus(),contact.getCreatedAt(),contact.getCreatedBy());
 
     }
 

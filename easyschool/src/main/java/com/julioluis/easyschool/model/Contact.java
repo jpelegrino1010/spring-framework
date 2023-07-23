@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class Contact {
+public class Contact extends BaseEntity {
 
 
     private Integer id;
@@ -20,6 +20,7 @@ public class Contact {
     private String subject;
     private String message;
     private String status;
+
 
 
 }
