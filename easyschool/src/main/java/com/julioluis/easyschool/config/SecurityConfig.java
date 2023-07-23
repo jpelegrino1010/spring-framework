@@ -20,7 +20,7 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http.csrf().ignoringRequestMatchers("/saveMessage").ignoringRequestMatchers(PathRequest.toH2Console())
+        http.csrf().ignoringRequestMatchers("/saveMessage")
                         .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
                         .requestMatchers("","/","/home").permitAll()
@@ -30,14 +30,13 @@ public class SecurityConfig {
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
-                        .requestMatchers(PathRequest.toH2Console()).permitAll()
+                        .requestMatchers("/saveMessage").permitAll()
                         .and().formLogin().loginPage("/login")
                         .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                         .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
 
                 .and().httpBasic();
 
-                http.headers().frameOptions().disable();
         return http.build();
     }
 
