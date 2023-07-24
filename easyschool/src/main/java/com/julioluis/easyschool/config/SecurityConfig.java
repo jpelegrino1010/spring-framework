@@ -23,6 +23,8 @@ public class SecurityConfig {
         http.csrf().ignoringRequestMatchers("/saveMessage")
                         .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
+                        .requestMatchers("/displayMessages").authenticated()
+                        .requestMatchers("/closeMsg").authenticated()
                         .requestMatchers("","/","/home").permitAll()
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/contact").permitAll()
