@@ -35,17 +35,14 @@ public class ContactService {
         contact.setCreatedAt(LocalDateTime.now());
         contact.setCreatedBy(EasySchoolContants.ANONYMOUS);
 
-        int result = contactRepository.saveContactMsg(contact);
-        if(result>0) {
+       Contact contactSaved = contactRepository.save(contact);
+        if(contactSaved.getId()>0) {
             isSaved = true;
         }
         return isSaved;
     }
 
-    public List<Contact> findMsgsWithOpenStatus(){
-        List<Contact> contactMsgs = contactRepository.findMsgsWithStatus(EasySchoolContants.OPEN);
-        return contactMsgs;
-    }
+
 
 
 
