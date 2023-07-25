@@ -20,11 +20,11 @@ public class SecurityConfig {
 
     @Bean
     SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http.csrf().ignoringRequestMatchers("/saveMessage")
+        http.csrf().ignoringRequestMatchers("/saveMessage").ignoringRequestMatchers("/public/**")
                         .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/displayMessages").authenticated()
-                        .requestMatchers("/closeMsg").authenticated()
+                        .requestMatchers("/displayMessages").hasRole("ADMIN")
+                        .requestMatchers("/closeMsg").hasRole("ADMIN")
                         .requestMatchers("","/","/home").permitAll()
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/contact").permitAll()
@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
                         .requestMatchers("/saveMessage").permitAll()
+                        .requestMatchers("/public/**").permitAll()
                         .and().formLogin().loginPage("/login")
                         .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
                         .and().logout().logoutSuccessUrl("/login?logout=true").invalidateHttpSession(true).permitAll()
