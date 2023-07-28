@@ -2,15 +2,19 @@ package com.julioluis.easyschool.service;
 
 
 import com.julioluis.easyschool.constants.EasySchoolContants;
+import com.julioluis.easyschool.model.Address;
 import com.julioluis.easyschool.model.Person;
+import com.julioluis.easyschool.model.Profile;
 import com.julioluis.easyschool.model.Roles;
 import com.julioluis.easyschool.repository.PersonRepository;
 import com.julioluis.easyschool.repository.RolesRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class PersonService {
 
     @Autowired
