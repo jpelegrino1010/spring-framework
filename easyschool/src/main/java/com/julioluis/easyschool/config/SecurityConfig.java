@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.csrf().ignoringRequestMatchers("/saveMessage").ignoringRequestMatchers("/public/**")
                         .and().authorizeHttpRequests()
                         .requestMatchers("/dashboard").authenticated()
-                        .requestMatchers("/displayMessages").hasRole("ADMIN")
+                        .requestMatchers("/displayMessages/**").hasRole("ADMIN")
                         .requestMatchers("/closeMsg").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("","/","/home").permitAll()
