@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.stereotype.Repository;
@@ -30,4 +31,14 @@ Page<Contact> findContactByStatus(String status, Pageable pageable);
 @Modifying
 @Query(value = "UPDATE Contact c set c.status=?1 where c.id=?2")
 int updateStatus(String status,Integer contactId);
+
+Page<Contact> findOpenMsgs(@Param("status") String status,Pageable pageable);
+
+@Query(nativeQuery = true)
+Page<Contact> findOpenMsgsNative(@Param("status") String status,Pageable pageable);
+
+@Transactional
+@Modifying
+@Query(nativeQuery = true)
+int updateStatusNative(String status,Integer contactId);
 }

@@ -47,18 +47,14 @@ public class ContactService {
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir){
         Pageable page= PageRequest.of(pageNum-1,5, sortDir.equals("asc")?Sort.by(sortField).ascending()
                 :Sort.by(sortField).descending());
-        Page<Contact> contactPage = contactRepository.findContactByStatus(EasySchoolContants.OPEN,page);
+        Page<Contact> contactPage = contactRepository.findOpenMsgs(EasySchoolContants.OPEN,page);
         return contactPage;
     }
 
 
     public boolean updateMsgStatus(int contactId){
         boolean isUpdated = false;
-//        Optional<Contact> contact = contactRepository.findById(contactId);
-//        contact.ifPresent(contact1 -> {
-//            contact1.setStatus(EasySchoolContants.CLOSE);
-//        });
-//        Contact updatedContact = contactRepository.save(contact.get());
+
         int row=contactRepository.updateStatus(EasySchoolContants.CLOSE,contactId);
         if(row>0) {
             isUpdated = true;
