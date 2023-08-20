@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Slf4j
-@Controller
+@Controller("profileControllerRest")
 public class ProfileController {
 
     @Autowired
