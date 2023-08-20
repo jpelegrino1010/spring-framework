@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/courses").permitAll()
                         .requestMatchers("/contact").permitAll()
                         .requestMatchers("/holidays/**").permitAll()
+                        .requestMatchers("/profile/**").permitAll()
                         .requestMatchers("/assets/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
