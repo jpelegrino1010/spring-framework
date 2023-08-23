@@ -19,8 +19,8 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-@Profile("prod")
-public class EasySchoolAuthProvider implements AuthenticationProvider {
+@Profile("!prod")
+public class NopProdEasySchoolProvider implements AuthenticationProvider {
 
     @Autowired
     private PersonRepository personRepository;
@@ -35,8 +35,7 @@ public class EasySchoolAuthProvider implements AuthenticationProvider {
 
         Person person=personRepository.readByEmail(email);
 
-        if(Objects.nonNull(person)
-        && passwordEncoder.matches(pwd,person.getPwd())) {
+        if(Objects.nonNull(person)) {
             return new UsernamePasswordAuthenticationToken(person.getEmail(),pwd,getGrantedAuthorities(person.getRoles()));
         }
 

@@ -1,6 +1,7 @@
 package com.julioluis.easyschool.service;
 
 
+import com.julioluis.easyschool.config.EasySchoolProps;
 import com.julioluis.easyschool.constants.EasySchoolContants;
 import com.julioluis.easyschool.model.Contact;
 import com.julioluis.easyschool.repository.ContactRepository;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -22,6 +24,8 @@ public class ContactService {
 
     @Autowired
    private ContactRepository contactRepository;
+    @Autowired
+    private EasySchoolProps easySchoolProps;
 
     public ContactService() {
         System.out.println("Contact initializing");
@@ -45,7 +49,13 @@ public class ContactService {
     }
 
     public Page<Contact> findMsgsWithOpenStatus(int pageNum, String sortField, String sortDir){
-        Pageable page= PageRequest.of(pageNum-1,5, sortDir.equals("asc")?Sort.by(sortField).ascending()
+
+        int pageSize=easySchoolProps.getPageSize();
+        if(Objects.nonNull(easySchoolProps.getContact().get("pageSize"))){
+            pageSize=Integer.valueOf(easySchoolProps.getContact().get("pageSize"));
+        }
+
+        Pageable page= PageRequest.of(pageNum-1,pageSize, sortDir.equals("asc")?Sort.by(sortField).ascending()
                 :Sort.by(sortField).descending());
         Page<Contact> contactPage = contactRepository.findOpenMsgs(EasySchoolContants.OPEN,page);
         return contactPage;
